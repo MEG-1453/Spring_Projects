@@ -1,0 +1,39 @@
+spring:
+  application:
+    name: social-backend
+  
+  # --- Veritabanı Bağlantı Ayarları ---
+  datasource:
+    # DİKKAT: Port numarası 5433 (Yeni Docker konteyneri)
+    url: jdbc:postgresql://localhost:5433/postgres
+    
+    # Kullanıcı adı ve şifre (Standart ayarlarımız)
+    username: postgres
+    password: dbhunter
+    
+    driver-class-name: org.postgresql.Driver
+  
+  # --- JPA ve Hibernate Ayarları ---
+  jpa:
+    hibernate:
+      # 'update': Entity'de yaptığın değişikliği veritabanına yansıtır ama veriyi silmez.
+      # İlk çalıştırdığında tablolar yoksa oluşturur.
+      ddl-auto: update
+    
+    # SQL sorgularını konsolda görelim
+    show-sql: true
+    
+    properties:
+      hibernate:
+        # SQL çıktılarını okunabilir formatta (alt alta) yazar
+        format_sql: true
+        # PostgreSQL lehçesini kullandığımızı belirtir (Opsiyonel ama iyidir)
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # --- JWT AYARLARI ---
+quest:
+  app:
+    # Rastgele uzun bir kelime salla. Bu senin gizli mührün olacak.
+    jwtSecret: SocialMediaProjectSecretKey123456789SocialMediaProjectSecretKey123456789
+    # Token Süresi: 24 Saat (24 * 60 * 60 * 1000 = 86400000 ms)
+    jwtExpirationMs: 86400000

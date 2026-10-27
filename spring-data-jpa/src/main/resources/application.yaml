@@ -1,0 +1,38 @@
+spring:
+  # Bu satır sizde zaten vardı
+  application:
+    name: spring-data-jpa
+  
+  # --- Veritabanı bağlantısı için bu bölümü ekleyin ---
+  datasource:
+    # Docker görüntüsünden: Port 5432 ve sunucu localhost
+    # "veritabani_adiniz" kısmını değiştirmeniz gerekiyor
+    url: jdbc:postgresql://localhost:5432/postgres
+    
+    # "kullanici_adiniz" kısmını değiştirmeniz gerekiyor
+    username: postgres 
+    
+    # "SIFRENIZ_BURAYA" kısmını değiştirmeniz gerekiyor
+    password: dbhunter
+    
+    # Bu satır PostgreSQL için standarttır, değiştirmeyin
+    driver-class-name: org.postgresql.Driver
+  
+  # --- JPA (Hibernate) ayarları için bu bölümü ekleyin ---
+  jpa:
+    hibernate:
+      # 'update': Proje her başladığında, entity (@Entity) sınıflarınıza bakar
+      # ve veritabanı şemasını (tabloları, kolonları) onlara göre günceller.
+      # 'create': Her açılışta veritabanını sıfırdan oluşturur (tüm veriler silinir).
+      ddl-auto: update 
+    properties:
+      hibernate:
+        # PostgreSQL'e özel SQL dilini kullanmasını söyler
+        # // bu satıra gerek yokmuş url den anlıyor muş > dialect: org.hibernate.dialect.PostgreSQLDialect
+        # Konsola yazılan SQL sorgularını daha okunaklı formatlar
+        format_sql: true
+        # Hibernate'e varsayılan olarak schemayı kullanacağını söylüyoruz
+        default_schema: student
+    # web sayfası oluşturulurken bu veri tabanı bağlantısını kodu bitirince kapatıp performans kaybını önler
+    open-in-view: false     
+    show-sql: true
